@@ -2,7 +2,10 @@
 var debug = require('nor-debug');
 var csv = module.exports = {};
 
-/** Stringify data as CSV */
+/** Stringify data as CSV
+ * @fixme The `opts.quote` is passed to regexp directly, not quoted.
+ * @params opts.quote {string} A string which is passed to regexp
+ */
 csv.stringify = function(data, opts) {
 	opts = opts || {};
 	debug.assert(data).is('array');
@@ -15,8 +18,14 @@ csv.stringify = function(data, opts) {
 	if(opts.ln === undefined) {
 		opts.ln = '\n';
 	}
+
+	debug.assert(opts.delimiter).is('string');
+	debug.assert(opts.quote).is('string');
+	debug.assert(opts.ln).is('string');
+
 	return data.map(function(row) {
-		return row.map(function(col) { return opts.quote + col.replace(opts.quote, opts.quote + opts.quote) + opts.quote; }).join(opts.delimiter);
+		var re = new RegExp(opts.quote, "g");
+		return row.map(function(col) { return opts.quote + (''+col).replace(re, opts.quote + opts.quote) + opts.quote; }).join(opts.delimiter);
 	}).join(opts.ln);
 };
 
