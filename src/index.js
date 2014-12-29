@@ -1,5 +1,6 @@
 /** */
 var debug = require('nor-debug');
+var ARRAY = require('nor-array');
 var csv = module.exports = {};
 
 /** Stringify data as CSV
@@ -23,9 +24,9 @@ csv.stringify = function(data, opts) {
 	debug.assert(opts.quote).is('string');
 	debug.assert(opts.ln).is('string');
 
-	return data.map(function(row) {
+	return ARRAY(data).map(function(row) {
 		var re = new RegExp(opts.quote, "g");
-		return row.map(function(col) { return opts.quote + (''+col).replace(re, opts.quote + opts.quote) + opts.quote; }).join(opts.delimiter);
+		return ARRAY(row).map(function(col) { return opts.quote + (''+col).replace(re, opts.quote + opts.quote) + opts.quote; }).join(opts.delimiter);
 	}).join(opts.ln);
 };
 
