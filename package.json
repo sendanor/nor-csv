@@ -1,6 +1,6 @@
 {
   "name": "nor-csv",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "CSV Stringifier",
   "main": "src/index.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "url": "https://github.com/sendanor/nor-csv/issues"
   },
   "dependencies": {
-    "nor-debug" : ">= 0.1.49  < 0.2.0",
+    "nor-debug" : ">= 0.1.52  < 0.2.0",
     "nor-array" : ">= 0.1.6  < 0.2.0"
   },
   "devDependencies": {
@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/sendanor/nor-csv",
   "dependencies": {
-    "nor-debug": ">= 0.1.49 < 0.2.0"
+    "nor-debug": ">= 0.1.52 < 0.2.0"
   }
 }
