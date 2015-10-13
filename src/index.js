@@ -1,6 +1,9 @@
 /** */
+var _Q = require('q');
 var debug = require('nor-debug');
 var ARRAY = require('nor-array');
+var CSV = require('csv');
+
 var csv = module.exports = {};
 
 /** Stringify data as CSV
@@ -28,6 +31,12 @@ csv.stringify = function(data, opts) {
 		var re = new RegExp(opts.quote, "g");
 		return ARRAY(row).map(function(col) { return opts.quote + (''+col).replace(re, opts.quote + opts.quote) + opts.quote; }).join(opts.delimiter);
 	}).join(opts.ln);
+};
+
+/** Parse CSV
+ */
+csv.parse = function(data, opts) {
+	return _Q.nfcall(CSV.parse, data, opts);
 };
 
 /* EOF */
